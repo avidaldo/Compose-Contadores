@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Compose Counters</string>
+    <string name="count1">Contador 1</string>
+    <string name="count2">Contador 2</string>
+    <string name="reset">Borrar</string>
+    <string name="increment">Incremento: </string>
+    <string name="global">Global: </string>
+    <string name="count_name">Contador</string>
+</resources>
