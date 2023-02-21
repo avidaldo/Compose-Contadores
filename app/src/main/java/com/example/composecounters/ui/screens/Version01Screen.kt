@@ -66,7 +66,7 @@ fun Version01Screen() {
                     value = incremento1.toString(),
                     onValueChange = {
                         incremento1 = it.toIntOrNull() ?: INCREMENT_DEFAULT
-                        if (incremento1 > 99 || incremento1 < 1) incremento1 = 1
+                        if (incremento1 > 99 || incremento1 < 1) incremento1 = INCREMENT_DEFAULT
                     },
                     Modifier
                         .width(30.dp)
@@ -104,7 +104,7 @@ fun Version01Screen() {
                     value = incremento2.toString(),
                     onValueChange = {
                         incremento2 = it.toIntOrNull() ?: INCREMENT_DEFAULT
-                        if (incremento2 > 99 || incremento2 < 1) incremento2 = 1
+                        if (incremento2 > 99 || incremento2 < 1) incremento2 = INCREMENT_DEFAULT
                     },
                     Modifier
                         .width(30.dp)
