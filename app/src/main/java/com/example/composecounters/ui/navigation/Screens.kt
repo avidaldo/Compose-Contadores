@@ -6,6 +6,8 @@ sealed class Screens(val route: String){
     object Version01: Screens("ej01")
     object Version02: Screens("ej02")
     object Version03: Screens("ej03")
-    object Version04: Screens("ej04")
 
+    object Version04: Screens("ej04")
+    object VersionPFFP: Screens("ej_pffp")
 }
+

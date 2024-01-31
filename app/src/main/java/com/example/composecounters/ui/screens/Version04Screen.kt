@@ -3,7 +3,13 @@ package com.example.composecounters.ui.screens
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -44,6 +50,7 @@ fun Version04Screen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
+        Text(text = "Contadores", style = MaterialTheme.typography.h2)
         ContadorIndividual(
             numCountName = stringResource(R.string.count1),
             globalCounter = { globalCounter += it },
@@ -76,7 +83,6 @@ fun ContadorIndividual(
     var isEmptyIncrement by rememberSaveable { mutableStateOf(false) }
 
     Column {
-
         Row(verticalAlignment = Alignment.CenterVertically) {
 
             Button(onClick = {

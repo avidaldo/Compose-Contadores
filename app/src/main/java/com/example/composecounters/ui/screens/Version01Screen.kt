@@ -3,14 +3,25 @@ package com.example.composecounters.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,6 +55,7 @@ fun Version01Screen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
+        Text(text = "Contadores", style = MaterialTheme.typography.h2)
         Column() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -92,9 +104,10 @@ fun Version01Screen() {
                 Spacer(Modifier.width(10.dp))
                 Text(text = cuenta2.toString())
                 Spacer(Modifier.width(6.dp))
-                Image(painter = painterResource(id = android.R.drawable.ic_menu_delete),
-                    contentDescription = "Borrar",
-                    Modifier.clickable { cuenta2 = 0 })
+                IconButton(onClick = { cuenta2 = 0 }) {
+                    Icon(imageVector = Icons.Default.Delete,
+                        contentDescription = "Borrar")
+                }
             }
             Row(Modifier.padding(horizontal = 20.dp),
                 horizontalArrangement = Arrangement.Center,
@@ -134,12 +147,15 @@ fun Version01Screen() {
 
 @Composable
 fun DecorationBox(innerTextField: @Composable () -> Unit) {
-    Row(Modifier
-        .clip(shape = RoundedCornerShape(5.dp))
-        .border(width = .5.dp,
-            color = MaterialTheme.colors.primary,
-            shape = RoundedCornerShape(5.dp))
-        .padding(4.dp),
+    Row(
+        Modifier
+            .clip(shape = RoundedCornerShape(5.dp))
+            .border(
+                width = .5.dp,
+                color = MaterialTheme.colors.primary,
+                shape = RoundedCornerShape(5.dp)
+            )
+            .padding(4.dp),
         verticalAlignment = Alignment.Bottom)
     { innerTextField() }
 }
