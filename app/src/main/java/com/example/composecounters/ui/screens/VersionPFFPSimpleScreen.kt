@@ -36,28 +36,32 @@ fun VersionPFFPSimpleScreen() {
         var countG by remember { mutableIntStateOf(0) }
 
         Bloque(
-            onClick = {
-                countG++
+            onClick = { incremento ->
+                countG += incremento
             })
-        Bloque(
-            onClick = {
-                countG++
-            })
+        Bloque({
+            countG += it
+        })
         BloqueG(countG)
 
 
     }
 }
 
+
+//TODO: sería interesante hacer un ejemplo en java con el paso de parámetro que recibe un parámetro,
+// para entender la capa inferior
+
 @Composable
-private fun Bloque(onClick: () -> Unit) {
+private fun Bloque(onClick: (Int) -> Unit, modifier: Modifier = Modifier) {
     var count by remember { mutableIntStateOf(0) }
     var value by remember { mutableStateOf("") }
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Button(onClick = {
-                onClick()
-                count += value.toIntOrNull() ?: 1
+                val inc = value.toIntOrNull() ?: 1
+                onClick(inc)
+                count += inc
             }) {
                 Text(text = "Contador 1 ($count)")
             }
@@ -65,7 +69,7 @@ private fun Bloque(onClick: () -> Unit) {
             Text(text = "$count")
         }
 
-        OutlinedTextField(value = value, onValueChange = {value = it} )
+        OutlinedTextField(value = value, onValueChange = { value = it })
     }
 }
 
