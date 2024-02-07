@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composecounters.ui.navigation.Navigation
+import com.example.composecounters.ui.screens.Pruebas
+import com.example.composecounters.ui.screens.VersionPFFPSimpleScreen
 import com.example.composecounters.ui.theme.ComposeCountersTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +24,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   Navigation()
+                   //Navigation()
+                   VersionPFFPSimpleScreen()
                 }
             }
         }

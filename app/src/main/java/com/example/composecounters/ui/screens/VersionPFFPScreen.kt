@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -23,51 +24,68 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import java.lang.NumberFormatException
 
 
 @Composable
 fun VersionPFFPScreen() {
 
-    var count1 by remember { mutableIntStateOf(0) }
     var count2 by remember { mutableIntStateOf(0) }
     var countG by remember { mutableIntStateOf(0) }
 
-    var valueTF1 by rememberSaveable { mutableStateOf("") }
+
+    var isError by rememberSaveable { mutableStateOf(false) }
 
     Column(
         Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Contadores", style = MaterialTheme.typography.h2)
-        Column {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Button(onClick = {
-                    count1 += valueTF1.toInt()
-                    countG += valueTF1.toInt()
-                }) {
-                    Text(text = "Contador 1 ($count1)")
-                }
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(text = "$count1")
-                IconButton(onClick = { count1 = 0 }) {
-                    Icon(
-                        imageVector = Icons.Filled.Delete, contentDescription = "Borrar"
-                    )
-                }
-            }
-            OutlinedTextField(value = valueTF1, onValueChange = {valueTF1 = it}, label = { Text(text = "Incremento") })
-        }
-        Column {
-
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Global: ($countG)")
-            IconButton(onClick = { countG = 0 }) {
-                Icon(
-                    imageVector = Icons.Filled.Delete, contentDescription = "Borrar"
-                )
-            }
-        }
+        Bloque(onIncremetCounG = {countG++})
+        Bloque(onIncremetCounG = {})
+        BloqueG(countG)
     }
 
+}
+
+@Composable
+private fun Bloque(onIncremetCounG: () -> Unit){
+    var count1 by remember { mutableIntStateOf(0) }
+    var valueTF1 by rememberSaveable { mutableStateOf("") }
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Button(onClick = {
+                    count1 += valueTF1.toIntOrNull() ?: 1
+                    onIncremetCounG()
+                    //countG += valueTF1.toIntOrNull() ?: 1
+            }
+            ) {
+                Text(text = "Contador 1 ($count1)")
+            }
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(text = "$count1")
+            IconButton(onClick = { count1 = 0 }) {
+                Icon(imageVector = Icons.Filled.Delete, contentDescription = "Borrar")
+            }
+        }
+        OutlinedTextField(
+            value = valueTF1, onValueChange = { valueTF1 = it },
+            label = { Text(text = "Incremento") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+    }
+}
+
+
+@Composable
+private fun BloqueG(countG: Int) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(text = "Global: ($countG)")
+//        IconButton(onClick = { countG = 0 }) {
+//            Icon(
+//                imageVector = Icons.Filled.Delete, contentDescription = "Borrar"
+//            )
+//        }
+    }
 }
